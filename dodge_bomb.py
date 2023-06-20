@@ -54,7 +54,6 @@ def main():
             pg.draw.circle(bd_img, (255, 0, 0), (10*r, 10*r), 10*r)
             bd_img.set_colorkey((0, 0, 0)) 
             bd_imgs.append(bd_img)
-
     """
     加速度のリスト、拡大爆弾Surfaceのリストの実装
     """
