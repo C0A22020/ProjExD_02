@@ -47,6 +47,18 @@ def main():
     vx, vy = +5, +5  # 練習２
     clock = pg.time.Clock()
     tmr = 0
+    accs = [a for a in range(1, 11)]
+    bd_imgs = []
+    for r in range(1, 11):
+            bd_img = pg.Surface((20*r, 20*r))
+            pg.draw.circle(bd_img, (255, 0, 0), (10*r, 10*r), 10*r)
+            bd_img.set_colorkey((0, 0, 0)) 
+            bd_imgs.append(bd_img)
+
+    """
+    加速度のリスト、拡大爆弾Surfaceのリストの実装
+    """
+
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
@@ -68,7 +80,9 @@ def main():
 
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, kk_rct)  # 練習３
-        bd_rct.move_ip(vx, vy)  # 練習２
+        avx, avy = vx*accs[min(tmr//500, 9)], vy*accs[min(tmr//500, 9)]  # 追加課題２
+        bd_img = bd_imgs[min(tmr//500, 9)]  # 追加課題２
+        bd_rct.move_ip(avx, avy)  # 練習２
         yoko, tate = check_bound(bd_rct)
         if not yoko:
             vx *= -1
